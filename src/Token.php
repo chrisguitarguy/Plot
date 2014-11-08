@@ -14,6 +14,10 @@ final class Token
     const EOF           = 'EOF';
     const OPEN_LIST     = 'OPEN_LIST';
     const CLOSE_LIST    = 'CLOSE_LIST';
+    const STRING_VALUE  = 'STRING_VALUE';
+    const INT_VALUE     = 'INT_VALUE';
+    const FLOAT_VALUE   = 'FLOAT_VALUE';
+    const IDENTIFIER    = 'IDENTIFIER';
 
     private $type;
     private $value;
@@ -44,7 +48,7 @@ final class Token
         $val = $this->getValue();
 
         return sprintf(
-            'Token(%s, %s)',
+            'Token(%s, "%s")',
             $this->getType(),
             mb_strlen($val) > 10 ? mb_substr($val, 0, 10).'...' : $val
         );

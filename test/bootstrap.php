@@ -9,4 +9,5 @@
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 $loader->addPsr4('Chrisguitarguy\\Plot\\', __DIR__.'/unit');
+$loader->addPsr4('Chrisguitarguy\\Plot\\', __DIR__.'/integration');
 $loader->addPsr4('Chrisguitarguy\\Plot\\', __DIR__.'/acceptance');
