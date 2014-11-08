@@ -22,20 +22,23 @@ final class ListNode implements Node
         }
 
         $values = array();
-        $callable = null;
 
-        $wrappedEnv = new Environment($env);
-        foreach ($this->children as $node) {
-            $values[] = $node->evaluate($wrappedEnv);
-        }
 
-        if (is_callable($values[0])) {
-            return call_user_func(
-                $values[0],
-                array_slice($values, 1),
-                array_slice($this->children, 1),
-                $env
-            );
+        reset($this->children);
+        $node = current($this->children);
+        $first = true;
+        while (false !== $node) {
+            $value = $node->evaluate($node instanceof ListNode ? new Environment($env) : $env);
+
+            if ($first && is_callable($value)) {
+                return call_user_func($value, array_slice($this->children, 1), $env);
+            }
+
+            $values[] = $value;
+
+            next($this->children);
+            $node = current($this->children);
+            $first = false;
         }
 
         return array_pop($values);

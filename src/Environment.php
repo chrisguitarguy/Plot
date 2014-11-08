@@ -23,6 +23,11 @@ class Environment
     public static function createDefaultEnvironment()
     {
         $env = new static();
+        $env->put('println!', new Core\PrintLine());
+        $env->put('print!', new Core\PrintCharacters());
+        $env->put('when', new Core\When());
+        $env->put('=', new Core\Eq());
+        $env->put('eq', new Core\Eq());
 
         return $env;
     }
