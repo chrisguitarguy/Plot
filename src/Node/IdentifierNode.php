@@ -22,6 +22,6 @@ final class IdentifierNode implements Node
 
     public function evaluate(Environment $env)
     {
-        // noop
+        return $env->get($this->ident);
     }
 }

@@ -31,6 +31,8 @@ class Program
      */
     public function evaluate(Environment $env=null)
     {
+        $env = $env ?: Environment::createDefaultEnvironment();
+
         $result = null;
         foreach ($this->nodes as $node) {
             $result = $node->evaluate($env);
