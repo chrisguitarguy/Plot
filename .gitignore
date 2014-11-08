@@ -1,6 +1,7 @@
 /vendor/*
 /coverage/*
 composer.lock
+/t.php
 
 # ignore certain files
 *.pyc

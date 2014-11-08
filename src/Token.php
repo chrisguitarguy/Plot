@@ -38,6 +38,11 @@ final class Token
         return $this->type;
     }
 
+    public function isType($tokenType)
+    {
+        return $this->getType() === $tokenType;
+    }
+
     public function getValue()
     {
         return $this->value;

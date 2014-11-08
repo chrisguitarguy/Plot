@@ -9,9 +9,11 @@
 
 namespace Chrisguitarguy\Plot;
 
-class TokenStream implements \IteratorAggregate, \Countable
+class TokenStream implements \Iterator, \Countable
 {
     private $tokens;
+
+    private $current = 0;
 
     public function __construct(array $tokens)
     {
@@ -27,9 +29,29 @@ class TokenStream implements \IteratorAggregate, \Countable
         return $this->tokens[$idx];
     }
 
-    public function getIterator()
+    public function current()
     {
-        return new \ArrayIterator($this->tokens);
+        return $this->tokens[$this->current];
+    }
+
+    public function key()
+    {
+        return $this->current;
+    }
+
+    public function next()
+    {
+        $this->current++;
+    }
+
+    public function rewind()
+    {
+        $this->current = 0;
+    }
+
+    public function valid()
+    {
+        return isset($this->tokens[$this->current]) && !$this->current()->isType(Token::EOF);
     }
 
     public function count()
