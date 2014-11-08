@@ -29,14 +29,13 @@ final class OpenList extends AbstractState
      */
     public function lex(Input $in, Lexer $lexer)
     {
-        $char = $in->next();
+        do {
+            $char = $in->next();
+        } while ($this->isWhitespace($char) && null !== $char);
+
         if (null === $char) {
             $lexer->emit(Token::EOF);
             return self::STOP_TOKENIZING;
-        }
-
-        while ($this->isWhitespace($char)) {
-            $char = $in->next();
         }
 
         if (!$this->isOpenList($char)) {
