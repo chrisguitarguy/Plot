@@ -22,6 +22,19 @@ final class IdentifierNode implements Node
 
     public function evaluate(Environment $env)
     {
-        return $env->get($this->ident);
+        switch ($this->ident) {
+            case 'true':
+                return true;
+                break;
+            case 'false':
+                return false;
+                break;
+            case 'null':
+                return null;
+                break;
+            default:
+                return $env->get($this->ident);
+                break;
+        }
     }
 }
