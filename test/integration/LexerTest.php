@@ -25,18 +25,25 @@ class LexerTest extends IntegrationTestCase
         $this->assertCount(5, $tokens);
     }
 
-    public function testListWithDoubleQuotedStringIsParsedIntoStringToken()
+    public function strings()
     {
-        $tokens = $this->lexer->tokenize(Input::fromString('("this is \\"a test")'));
-        $this->assertCount(4, $tokens);
-        $this->assertEquals('"this is \\"a test"', $tokens->at(1)->getValue());
+        return [
+            ['"this is \\"a test"'],
+            ["'this is \\'a test'"],
+            ['""'],
+            ["''"],
+        ];
     }
 
-    public function testListWithSingleQuotedStringIsParsedIntoStringToken()
+    /**
+     * @dataProvider strings
+     */
+    public function testListWithSingleStringParsesStringToken($string)
     {
-        $tokens = $this->lexer->tokenize(Input::fromString("('this is \\'a test')"));
+        $tokens = $this->lexer->tokenize(Input::fromString("({$string})"));
         $this->assertCount(4, $tokens);
-        $this->assertEquals("'this is \\'a test'", $tokens->at(1)->getValue());
+        $this->assertEquals($string, $tokens->at(1)->getValue());
+        $this->assertEquals(Token::STRING_VALUE, $tokens->at(1)->getType());
     }
 
     public static function intValues()
