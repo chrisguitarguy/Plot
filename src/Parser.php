@@ -69,7 +69,6 @@ class Parser
         $tokens->next();
         while ($tokens->valid() && !$tokens->current()->isType(Token::CLOSE_LIST)) {
             $list->add($this->doParse($tokens));
-            $tokens->next();
         }
         $tokens->next();
 
