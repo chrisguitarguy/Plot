@@ -38,7 +38,7 @@ class Lexer
         $state = new LexerState\OpenList();
         do {
             $state = $state->lex($this->input, $this);
-        } while (null !== $state);
+        } while (LexerState\LexerState::STOP_TOKENIZING !== $state);
 
         return new TokenStream($this->tokens);
     }
