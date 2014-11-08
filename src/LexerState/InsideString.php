@@ -30,7 +30,6 @@ final class InsideString extends AbstractState
     public function lex(Input $in, Lexer $lexer)
     {
         $this->expectedSurround($in);
-
         while (true) {
             $cur = $in->current();
             if (null === $cur) {
@@ -43,10 +42,10 @@ final class InsideString extends AbstractState
 
             $in->next();
         }
+        $this->expectedSurround($in);
 
         $lexer->emit(Token::STRING_VALUE);
 
-        $this->expectedSurround($in);
 
         return $this->previousState();
     }
@@ -62,7 +61,6 @@ final class InsideString extends AbstractState
             ));
         }
         $in->next();
-        $in->ignore();
     }
 
     private function isSurroundChar($char)

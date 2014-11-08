@@ -29,14 +29,14 @@ class LexerTest extends IntegrationTestCase
     {
         $tokens = $this->lexer->tokenize(Input::fromString('("this is \\"a test")'));
         $this->assertCount(4, $tokens);
-        $this->assertEquals('this is \\"a test', $tokens->at(1)->getValue());
+        $this->assertEquals('"this is \\"a test"', $tokens->at(1)->getValue());
     }
 
     public function testListWithSingleQuotedStringIsParsedIntoStringToken()
     {
         $tokens = $this->lexer->tokenize(Input::fromString("('this is \\'a test')"));
         $this->assertCount(4, $tokens);
-        $this->assertEquals("this is \\'a test", $tokens->at(1)->getValue());
+        $this->assertEquals("'this is \\'a test'", $tokens->at(1)->getValue());
     }
 
     public static function intValues()
