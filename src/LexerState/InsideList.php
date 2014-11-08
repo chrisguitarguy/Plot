@@ -29,7 +29,16 @@ final class InsideList extends AbstractState
      */
     public function lex(Input $in, Lexer $lexer)
     {
-        while ($this->isWhitespace($in->current())) {
+        while (true) {
+            $char = $in->current();
+            if (null === $char) {
+                throw new SyntaxError('Unexpected EOF at '.$in->context());
+            }
+
+            if (!$this->isWhitespace($char)) {
+                break;
+            }
+
             $in->next();
         }
 
