@@ -10,8 +10,9 @@
 namespace Chrisguitarguy\Plot\Node;
 
 use Chrisguitarguy\Plot\Environment;
+use Chrisguitarguy\Plot\DefaultEnvironment;
 
-final class ListNode extends AbstractNode
+final class ListNode extends AbstractNode implements \IteratorAggregate
 {
     private $children = array();
 
@@ -27,7 +28,7 @@ final class ListNode extends AbstractNode
         $node = current($this->children);
         $first = true;
         while (false !== $node) {
-            $value = $node->evaluate($node instanceof ListNode ? new Environment($env) : $env);
+            $value = $node->evaluate($node instanceof ListNode ? new DefaultEnvironment($env) : $env);
 
             if ($first && is_callable($value)) {
                 return call_user_func($value, array_slice($this->children, 1), $env, $node);
@@ -46,5 +47,10 @@ final class ListNode extends AbstractNode
     public function add(Node $node)
     {
         $this->children[] = $node;
+    }
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->children);
     }
 }

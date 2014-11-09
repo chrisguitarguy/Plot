@@ -9,7 +9,7 @@
 
 namespace Chrisguitarguy\Plot;
 
-class Environment
+class DefaultEnvironment implements Environment
 {
     private $values = array();
 
@@ -20,7 +20,7 @@ class Environment
         $this->parent = $parent;
     }
 
-    public static function createDefaultEnvironment()
+    public static function create()
     {
         $env = new static();
         $env->put('define', new Core\Def());
@@ -75,6 +75,11 @@ class Environment
     public function hasParent()
     {
         return null !== $this->parent;
+    }
+
+    public function __clone()
+    {
+        $this->parent = clone $this->parent;
     }
 
     private function parentHas($ident)
