@@ -28,13 +28,29 @@ abstract class AbstractOperation
 
         reset($nodes);
         $value = current($nodes)->evaluate($env);
+        $this->checkNumeric($value, current($nodes), $self);
+
         while (false !== next($nodes)) {
             $node = current($nodes);
-            $value = $this->op($value, $node->evaluate($env));
+            $_value = $node->evaluate($env);
+            $this->checkNumeric($_value, $node, $self);
+            $value = $this->op($value, $_value);
         }
 
         return $value;
     }
 
     abstract protected function op($initial, $value);
+
+    private function checkNumeric($value, Node $node, Node $self)
+    {
+        if (!is_numeric($value)) {
+            throw new BadCallException(sprintf(
+                '`%s` expected numeric arguments, got "%s" near %s',
+                $self->rawIdent(),
+                $value,
+                $node->context()
+            ));
+        }
+    }
 }
