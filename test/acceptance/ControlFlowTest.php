@@ -101,4 +101,43 @@ class ControlFlowTest extends AcceptTestCase
     {
         $this->execute('(not true true)');
     }
+
+    public function testOrWithOneTrueValueEvaluatesToTrue()
+    {
+        $this->assertTrue($this->execute('(or false true)'));
+    }
+
+    public function testOrWithNoTrueValuesEvaluatesToVale()
+    {
+        $this->assertFalse($this->execute('(or false false)'));
+        $this->assertFalse($this->execute('(or false)'));
+    }
+
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testOrWithTooFewArgumentsCausesError()
+    {
+        $this->execute('(or)');
+    }
+
+    public function testAndWithAllTrueARgumentsEvalutesToTrue()
+    {
+        $this->assertTrue($this->execute('(and (true) true true)'));
+        $this->assertTrue($this->execute('(and true)'));
+    }
+
+    public function testAndWithFalseArgumentEvaluatesToFalse()
+    {
+        $this->assertFalse($this->execute('(and (false) true true)'));
+        $this->assertFalse($this->execute('(and false)'));
+    }
+
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testAndWithTooFewArgumentsCausesError()
+    {
+        $this->execute('(and)');
+    }
 }

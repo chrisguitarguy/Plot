@@ -13,18 +13,24 @@ use Chrisguitarguy\Plot\Environment;
 use Chrisguitarguy\Plot\Node\Node;
 use Chrisguitarguy\Plot\Exception\BadCallException;
 
-class LogicalNot
+final class LogicalOr
 {
     public function __invoke(array $nodes, Environment $env, Node $self)
     {
-        if (count($nodes) !== 1) {
+        if (count($nodes) < 1) {
             throw new BadCallException(sprintf(
-                '`not` expects exactly 1 argument, got %d near %s',
+                '`or` expects at least 1 argument, got %d near %s',
                 count($nodes),
                 $self->context()
             ));
         }
 
-        return !$nodes[0]->evaluate($env);
+        foreach ($nodes as $node) {
+            if ($node->evaluate($env)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

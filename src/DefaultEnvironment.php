@@ -33,6 +33,8 @@ final class DefaultEnvironment implements Environment
         $env->put('if', new Core\LogicalIf());
         $env->put('not', new Core\LogicalNot());
         $env->put('!', new Core\LogicalNot());
+        $env->put('or', new Core\LogicalOr());
+        $env->put('and', new Core\LogicalAnd());
 
         $env->put('=', new Core\Eq());
         $env->put('eq', new Core\Eq());
