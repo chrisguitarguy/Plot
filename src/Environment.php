@@ -67,12 +67,31 @@ class Environment
         $this->values[$ident] = $value;
     }
 
+    public function putParent($ident, $value)
+    {
+        $this->getParent()->put($ident, $value);
+    }
+
+    public function hasParent()
+    {
+        return null !== $this->parent;
+    }
+
     private function parentHas($ident)
     {
-        if (!$this->parent) {
+        if (!$this->hasParent()) {
             return false;
         }
 
         return $this->parent->has($ident);
+    }
+
+    private function getParent()
+    {
+        if (!$this->hasParent()) {
+            throw new Exception\NoParentException('Evironment does not have parent');
+        }
+
+        return $this->parent;
     }
 }

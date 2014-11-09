@@ -27,7 +27,7 @@ final class ListNode extends AbstractNode
         $node = current($this->children);
         $first = true;
         while (false !== $node) {
-            $value = $node->evaluate($env);
+            $value = $node->evaluate($node instanceof ListNode ? new Environment($env) : $env);
 
             if ($first && is_callable($value)) {
                 return call_user_func($value, array_slice($this->children, 1), $env, $node);

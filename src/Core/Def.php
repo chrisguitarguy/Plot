@@ -34,7 +34,10 @@ class Def
             ));
         }
 
-        $env->put($nodes[0]->rawIdent(), $nodes[1]->evaluate($env));
+        // since `(define ...)` is going to be inside its own "environment"
+        // as its inside a list, we want to put the value into the parent
+        // environment. This is how we get scopes and such.
+        $env->putParent($nodes[0]->rawIdent(), $nodes[1]->evaluate($env));
 
         return null;
     }
