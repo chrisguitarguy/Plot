@@ -23,11 +23,20 @@ class Environment
     public static function createDefaultEnvironment()
     {
         $env = new static();
+        $env->put('define', new Core\Def());
         $env->put('println!', new Core\PrintLine());
         $env->put('print!', new Core\PrintCharacters());
         $env->put('when', new Core\When());
         $env->put('=', new Core\Eq());
         $env->put('eq', new Core\Eq());
+        $env->put('>', new Core\Gt());
+        $env->put('gt', new Core\Gt());
+        $env->put('>=', new Core\Gte());
+        $env->put('gte', new Core\Gte());
+        $env->put('<', new Core\Lt());
+        $env->put('lt', new Core\Lt());
+        $env->put('<=', new Core\Lte());
+        $env->put('lte', new Core\Lte());
 
         return $env;
     }

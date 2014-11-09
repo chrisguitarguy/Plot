@@ -11,10 +11,10 @@ namespace Chrisguitarguy\Plot\Core;
 
 use Chrisguitarguy\Plot\Environment;
 
-class Eq extends AbstractComparison
+class Gte extends AbstractComparison
 {
     protected function compare($one, $two)
     {
-        return $one === $two;
+        return $one >= $two;
     }
 }
