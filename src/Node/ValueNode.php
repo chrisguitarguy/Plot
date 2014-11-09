@@ -9,14 +9,16 @@
 
 namespace Chrisguitarguy\Plot\Node;
 
+use Chrisguitarguy\Plot\Token;
 use Chrisguitarguy\Plot\Environment;
 
-final class ValueNode implements Node
+final class ValueNode extends AbstractNode
 {
     private $value;
 
-    public function __construct($value)
+    public function __construct($value, Token $token)
     {
+        parent::__construct($token);
         $this->value = $value;
     }
 

@@ -25,4 +25,11 @@ interface Node
      * @return  mixed
      */
     public function evaluate(Environment $env);
+
+    /**
+     * Get the context of the node -- where it appeared in the input.
+     *
+     * @return  string
+     */
+    public function context();
 }

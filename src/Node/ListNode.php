@@ -11,7 +11,7 @@ namespace Chrisguitarguy\Plot\Node;
 
 use Chrisguitarguy\Plot\Environment;
 
-final class ListNode implements Node
+final class ListNode extends AbstractNode
 {
     private $children = array();
 
@@ -22,7 +22,7 @@ final class ListNode implements Node
         }
 
         $values = array();
-
+        var_dump(__METHOD__);
 
         reset($this->children);
         $node = current($this->children);

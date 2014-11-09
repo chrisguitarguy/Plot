@@ -9,14 +9,16 @@
 
 namespace Chrisguitarguy\Plot\Node;
 
+use Chrisguitarguy\Plot\Token;
 use Chrisguitarguy\Plot\Environment;
 
-final class IdentifierNode implements Node
+final class IdentifierNode extends AbstractNode
 {
     private $ident;
 
-    public function __construct($ident)
+    public function __construct($ident, Token $token)
     {
+        parent::__construct($token);
         $this->ident = $ident;
     }
 
@@ -36,5 +38,10 @@ final class IdentifierNode implements Node
                 return $env->get($this->ident);
                 break;
         }
+    }
+
+    public function rawIdent()
+    {
+        return $this->ident;
     }
 }

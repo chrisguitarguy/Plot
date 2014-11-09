@@ -65,7 +65,7 @@ class Parser
 
     private function parseList(TokenStream $tokens)
     {
-        $list = new Node\ListNode();
+        $list = new Node\ListNode($tokens->current());
         $tokens->next();
         while ($tokens->valid() && !$tokens->current()->isType(Token::CLOSE_LIST)) {
             $list->add($this->doParse($tokens));
@@ -91,12 +91,13 @@ class Parser
         }
         $tokens->next();
 
-        return new Node\ValueNode($value);
+        return new Node\ValueNode($value, $cur);
     }
 
     private function parseIdentifier(TokenStream $tokens)
     {
-        $node = new Node\IdentifierNode($tokens->current()->getValue());
+        $cur = $tokens->current();
+        $node = new Node\IdentifierNode($cur->getValue(), $cur);
         $tokens->next();
 
         return $node;
