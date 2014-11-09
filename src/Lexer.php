@@ -50,6 +50,7 @@ class Lexer
      */
     public function emit($tokenType)
     {
-        $this->tokens[] = new Token($tokenType, trim($this->input->slice()));
+        $ctx = $this->input->context();
+        $this->tokens[] = new Token($tokenType, trim($this->input->slice()), $ctx);
     }
 }

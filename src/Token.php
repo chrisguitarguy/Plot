@@ -21,8 +21,9 @@ final class Token
 
     private $type;
     private $value;
+    private $context;
 
-    public function __construct($type, $value)
+    public function __construct($type, $value, $context)
     {
         $const = @constant(__CLASS__."::{$type}");
         if (!$const) {
@@ -31,6 +32,7 @@ final class Token
 
         $this->type = $type;
         $this->value = $value;
+        $this->context = $context;;
     }
 
     public function getType()
@@ -46,6 +48,11 @@ final class Token
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function getContext()
+    {
+        return $this->context;
     }
 
     public function __toString()
