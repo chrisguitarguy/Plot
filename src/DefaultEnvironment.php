@@ -28,6 +28,9 @@ final class DefaultEnvironment implements Environment
         $env->put('println!', new Core\PrintLine());
         $env->put('print!', new Core\PrintCharacters());
         $env->put('when', new Core\When());
+        $env->put('if', new Core\LogicalIf());
+        $env->put('not', new Core\LogicalNot());
+        $env->put('!', new Core\LogicalNot());
         $env->put('=', new Core\Eq());
         $env->put('eq', new Core\Eq());
         $env->put('>', new Core\Gt());
