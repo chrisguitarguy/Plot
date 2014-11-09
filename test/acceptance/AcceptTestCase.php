@@ -11,5 +11,19 @@ namespace Chrisguitarguy\Plot;
 
 class AcceptTestCase extends \PHPUnit_Framework_TestCase
 {
+    protected $plot = null;
 
+    protected function execute($string)
+    {
+        return $this->getPlot()->evaluateString($string);
+    }
+
+    protected function getPlot()
+    {
+        if (null === $this->plot) {
+            $this->plot = new Plot();
+        }
+
+        return $this->plot;
+    }
 }
