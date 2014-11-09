@@ -10,16 +10,18 @@
 namespace Chrisguitarguy\Plot\Core;
 
 use Chrisguitarguy\Plot\Environment;
+use Chrisguitarguy\Plot\Node\Node;
 use Chrisguitarguy\Plot\Exception\BadCallException;
 
 class When
 {
-    public function __invoke(array $nodes, Environment $env)
+    public function __invoke(array $nodes, Environment $env, Node $self)
     {
         if (count($nodes) !== 2) {
             throw new BadCallException(sprintf(
-                '`when` expects exactly 2 arguments, got %d',
-                count($values)
+                '`when` expects exactly 2 arguments, got %d near %s',
+                count($values),
+                $self->context()
             ));
         }
 
