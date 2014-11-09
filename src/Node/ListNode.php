@@ -22,16 +22,15 @@ final class ListNode extends AbstractNode
         }
 
         $values = array();
-        var_dump(__METHOD__);
 
         reset($this->children);
         $node = current($this->children);
         $first = true;
         while (false !== $node) {
-            $value = $node->evaluate($node instanceof ListNode ? new Environment($env) : $env);
+            $value = $node->evaluate($env);
 
             if ($first && is_callable($value)) {
-                return call_user_func($value, array_slice($this->children, 1), $env);
+                return call_user_func($value, array_slice($this->children, 1), $env, $node);
             }
 
             $values[] = $value;
