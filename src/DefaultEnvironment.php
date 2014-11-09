@@ -9,7 +9,7 @@
 
 namespace Chrisguitarguy\Plot;
 
-class DefaultEnvironment implements Environment
+final class DefaultEnvironment implements Environment
 {
     private $values = array();
 
@@ -24,6 +24,7 @@ class DefaultEnvironment implements Environment
     {
         $env = new static();
         $env->put('define', new Core\Def());
+        $env->put('lambda', new Core\Lambda());
         $env->put('println!', new Core\PrintLine());
         $env->put('print!', new Core\PrintCharacters());
         $env->put('when', new Core\When());
@@ -79,7 +80,9 @@ class DefaultEnvironment implements Environment
 
     public function __clone()
     {
-        $this->parent = clone $this->parent;
+        if ($this->hasParent()) {
+            $this->parent = clone $this->parent;
+        }
     }
 
     private function parentHas($ident)
