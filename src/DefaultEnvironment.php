@@ -25,12 +25,15 @@ final class DefaultEnvironment implements Environment
         $env = new static();
         $env->put('define', new Core\Def());
         $env->put('lambda', new Core\Lambda());
+
         $env->put('println!', new Core\PrintLine());
         $env->put('print!', new Core\PrintCharacters());
+
         $env->put('when', new Core\When());
         $env->put('if', new Core\LogicalIf());
         $env->put('not', new Core\LogicalNot());
         $env->put('!', new Core\LogicalNot());
+
         $env->put('=', new Core\Eq());
         $env->put('eq', new Core\Eq());
         $env->put('>', new Core\Gt());
@@ -41,6 +44,12 @@ final class DefaultEnvironment implements Environment
         $env->put('lt', new Core\Lt());
         $env->put('<=', new Core\Lte());
         $env->put('lte', new Core\Lte());
+
+        $env->put('-', new Core\Sub());
+        $env->put('+', new Core\Add());
+        $env->put('/', new Core\Div());
+        $env->put('*', new Core\Mult());
+        $env->put('%', new Core\Mod());
 
         return $env;
     }
