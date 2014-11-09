@@ -16,13 +16,13 @@ class When
 {
     public function __invoke(array $nodes, Environment $env)
     {
-        if (count($nodes) !== 3) {
+        if (count($nodes) !== 2) {
             throw new BadCallException(sprintf(
-                '`when` expects exactly 3 arguments, got %d',
+                '`when` expects exactly 2 arguments, got %d',
                 count($values)
             ));
         }
 
-        return $nodes[0]->evaluate($env) ? $nodes[1]->evaluate($env) : $nodes[2]->evaluate($env);
+        return $nodes[0]->evaluate($env) ? $nodes[1]->evaluate($env) : null;
     }
 }
