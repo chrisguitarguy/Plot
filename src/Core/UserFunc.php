@@ -42,6 +42,7 @@ class UserFunc
             ));
         }
 
+        $env->put('recur', $this);
         foreach (array_combine($this->argNames, $nodes) as $name => $node) {
             $env->put($name, $node->evaluate($env));
         }
