@@ -39,6 +39,17 @@ class userDefinedFunctionsTest extends AcceptTestCase
         $this->assertEquals('boom', $result);
     }
 
+    public function testUserFunctionsCanBeReasigned()
+    {
+        $prog ="
+        (define fn (lambda (countdown) (if (<= countdown 0) 'boom' (recur (- countdown 1)))))
+        (define fn2 fn)
+        (fn2 10)";
+
+        $result = $this->execute($prog);
+        $this->assertEquals('boom', $result);
+    }
+
     /**
      * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
      */
