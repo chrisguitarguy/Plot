@@ -23,10 +23,20 @@ class userDefinedFunctionsTest extends AcceptTestCase
         $this->assertEquals(2, $result);
     }
 
-    public function testDefinedUserFunctionsCanBeReusedFurtherOnInTheScript()
+    public function testUserFunctionsCanBeReusedFurtherOnInTheScript()
     {
         $result = $this->execute('(define fn (lambda () true)) (fn)');
         $this->assertTrue($result);
+    }
+
+    public function testUserFunctionsCanBeRecursive()
+    {
+        $prog ="
+        (define fn (lambda (countdown) (if (<= countdown 0) 'boom' (recur (- countdown 1)))))
+        (fn 10)";
+
+        $result = $this->execute($prog);
+        $this->assertEquals('boom', $result);
     }
 
     /**
