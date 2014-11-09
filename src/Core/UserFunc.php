@@ -11,7 +11,9 @@ namespace Chrisguitarguy\Plot\Core;
 
 use Chrisguitarguy\Plot\Environment;
 use Chrisguitarguy\Plot\ClosureEnvironment;
+use Chrisguitarguy\Plot\Exception\BadCallException;
 use Chrisguitarguy\Plot\Node\Node;
+use Chrisguitarguy\Plot\Node\IdentifierNode;
 
 class UserFunc
 {
@@ -32,7 +34,8 @@ class UserFunc
     {
         if (count($nodes) !== count($this->argNames)) {
             throw new BadCallException(sprintf(
-                'Expected %d arguments, got %d near %s',
+                '`%s` expects %d arguments, got %d near %s',
+                $self instanceof IdentifierNode ? $self->rawIdent() : 'Anonymous Function',
                 count($this->argNames),
                 count($nodes),
                 $self->context()
