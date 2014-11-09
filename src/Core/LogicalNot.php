@@ -20,7 +20,7 @@ class LogicalNot
         if (count($nodes) !== 1) {
             throw new BadCallException(sprintf(
                 '`not` expects exactly 1 arguments, got %d near %s',
-                count($values),
+                count($nodes),
                 $self->context()
             ));
         }

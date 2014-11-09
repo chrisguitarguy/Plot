@@ -20,7 +20,7 @@ class LogicalIf
         if (count($nodes) !== 3) {
             throw new BadCallException(sprintf(
                 '`if` expects exactly 3 arguments, got %d near %s',
-                count($values),
+                count($nodes),
                 $self->context()
             ));
         }

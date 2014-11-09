@@ -23,6 +23,22 @@ class ControlFlowTest extends AcceptTestCase
         $this->assertNull($result);
     }
 
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testWhenWithToFewArgumentsCausesError()
+    {
+        $this->execute('(when)');
+    }
+
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testWhenWithToManyArgumentsCausesError()
+    {
+        $this->execute('(when true "yep" "yep")');
+    }
+
     public function testIfWithTrueFirstArgumentEvaluatesAndReturnsSecondArgument()
     {
         $result = $this->execute('(if true 1 2)');
@@ -33,6 +49,22 @@ class ControlFlowTest extends AcceptTestCase
     {
         $result = $this->execute('(if false 1 2)');
         $this->assertEquals(2, $result);
+    }
+
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testIfWithToFewArgumentsCausesError()
+    {
+        $this->execute('(if true)');
+    }
+
+    /**
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testIfWithToManyArgumentsCausesError()
+    {
+        $this->execute('(if true "one" "two" "three")');
     }
 
     public function nots()
@@ -50,5 +82,23 @@ class ControlFlowTest extends AcceptTestCase
     {
         $result = $this->execute("({$not} true)");
         $this->assertFalse($result);
+    }
+
+    /**
+     * @dataProvider nots
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testNotWithTwoFewArgumentsCausesError()
+    {
+        $this->execute('(not)');
+    }
+
+    /**
+     * @dataProvider nots
+     * @expectedException Chrisguitarguy\Plot\Exception\BadCallException
+     */
+    public function testNotWithTwoManyArgumentsCausesError()
+    {
+        $this->execute('(not true true)');
     }
 }

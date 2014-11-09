@@ -20,7 +20,7 @@ class When
         if (count($nodes) !== 2) {
             throw new BadCallException(sprintf(
                 '`when` expects exactly 2 arguments, got %d near %s',
-                count($values),
+                count($nodes),
                 $self->context()
             ));
         }
