@@ -28,6 +28,6 @@ class Plot
 
     public function evaluateFile($filename)
     {
-        return $this->parser->parser(Input::fromFiel($filename))->evaluate();
+        return $this->parser->parser(Input::fromFile($filename))->evaluate();
     }
 }
